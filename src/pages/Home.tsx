@@ -109,7 +109,7 @@ function Hero() {
         >
           {heroScreens.map((s, i) => (
             <figure key={s.ref} className={`hero-shot shot-${i + 1}`}>
-              <img src={s.src} alt={s.alt} loading="eager" decoding="async" />
+              <img src={s.src} alt={s.alt} loading="eager" decoding="sync" />
               <figcaption className="plate-ref">{s.ref}</figcaption>
             </figure>
           ))}
@@ -166,7 +166,7 @@ function Works() {
               }
             >
               <span className="work-card-visual">
-                {cover && <img src={cover.src} alt={cover.alt} loading="eager" decoding="async" />}
+                {cover && <img src={cover.src} alt={cover.alt} loading="eager" decoding="sync" />}
               </span>
               <span className="work-card-meta">{p.sector}</span>
               <h3>{p.title}</h3>
