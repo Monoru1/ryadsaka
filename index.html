@@ -1,1 +1,67 @@
-<!doctype html><html lang="fr"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="#173f39"/><meta name="description" content="Ryad Saka conçoit des présences web qui rendent une activité plus claire, plus désirable et plus mémorable."/><meta property="og:title" content="Ryad Saka — Présences web conçues pour être choisies"/><meta property="og:description" content="Sites, identités et outils pensés pour donner envie de vous contacter."/><meta property="og:type" content="website"/><title>Ryad Saka — Présences web conçues pour être choisies</title><link rel="icon" href="/favicon.svg"/></head><body><form name="project-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden><input type="hidden" name="form-name" value="project-request"/><input name="bot-field"/><input name="name"/><input name="project"/><input name="contact"/><input name="need"/><input name="budget"/><input name="deadline"/><textarea name="message"></textarea></form><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#173f39" />
+    <title>Ryad Saka — Sites sur mesure pour hôtels, restaurants, marques et indépendants</title>
+    <meta
+      name="description"
+      content="Ryad Saka conçoit et développe des sites sur mesure : direction visuelle, développement et mise en ligne par une seule personne. Six projets consultables en ligne."
+    />
+    <link rel="canonical" href="https://ryadsaka.netlify.app/" />
+    <meta property="og:title" content="Ryad Saka — Sites sur mesure qui donnent envie de vous choisir" />
+    <meta
+      property="og:description"
+      content="Hôtels, restaurants, marques, artistes, indépendants : des sites conçus, développés et mis en ligne par une seule personne."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ryadsaka.netlify.app/" />
+    <meta property="og:image" content="https://ryadsaka.netlify.app/og-image.png" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ryad Saka — Sites sur mesure qui donnent envie de vous choisir" />
+    <meta
+      name="twitter:description"
+      content="Hôtels, restaurants, marques, artistes, indépendants : des sites conçus, développés et mis en ligne par une seule personne."
+    />
+    <meta name="twitter:image" content="https://ryadsaka.netlify.app/og-image.png" />
+    <link rel="icon" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Ryad Saka — Créateur-développeur indépendant",
+        "url": "https://ryadsaka.netlify.app/",
+        "email": "contact@ryadsaka.com",
+        "areaServed": "FR",
+        "description": "Conception et développement de sites sur mesure pour hôtels, restaurants, marques, artistes et indépendants.",
+        "founder": { "@type": "Person", "name": "Ryad Saka" }
+      }
+    </script>
+  </head>
+  <body>
+    <!--
+      Formulaire statique requis par Netlify Forms : il doit lister exactement
+      les champs envoyés par le composant ContactForm pour que la détection
+      au build fonctionne. Ne pas le supprimer.
+    -->
+    <form name="project-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="project-request" />
+      <input type="hidden" name="entry" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="project" />
+      <select name="contact-method"></select>
+      <input name="contact" />
+      <select name="existing"></select>
+      <select name="need"></select>
+      <select name="goal"></select>
+      <select name="budget"></select>
+      <input name="deadline" />
+      <textarea name="message"></textarea>
+    </form>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
