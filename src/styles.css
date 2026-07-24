@@ -61,17 +61,13 @@ h1, h2, h3 { font-weight: 400; }
 }
 .skip-link:focus-visible { left: 8px; }
 
-/* Révélation au scroll — neutralisée si mouvement réduit. */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(var(--reveal-shift));
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-[data-reveal].is-visible { opacity: 1; transform: none; }
+/* Les contenus sont immédiatement disponibles. Les transitions ne doivent jamais
+   décider si une information est visible ou non. */
+[data-reveal] { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  [data-reveal] { transition: none; }
   * { animation: none !important; transition-duration: 0.01ms !important; }
 }
 
@@ -128,6 +124,7 @@ h1, h2, h3 { font-weight: 400; }
 .text-link:hover { color: var(--clay); }
 .text-link.quiet { color: var(--muted); }
 .text-link.quiet:hover { color: var(--clay); }
+.arrow-icon { width: 14px; height: 14px; flex: 0 0 auto; }
 
 .lead {
   font-size: clamp(1.05rem, 1.5vw, 1.3rem);
@@ -343,14 +340,27 @@ footer {
   border: 1px solid var(--line-strong);
   overflow: hidden;
   background: var(--pine);
+  display: grid;
+  place-items: center;
 }
 .project-card-visual img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
+  object-fit: contain;
+  background: var(--pine);
 }
-.project-card:hover .project-card-visual > img:first-child { transform: scale(1.025); }
+.project-card.tone-hotel .project-card-visual,
+.project-card.tone-hotel .project-card-visual img { background: #27211d; }
+.project-card.tone-museum .project-card-visual,
+.project-card.tone-street .project-card-visual,
+.project-card.tone-museum .project-card-visual img,
+.project-card.tone-street .project-card-visual img { background: #0b0b0c; }
+.project-card.tone-restaurant .project-card-visual,
+.project-card.tone-restaurant .project-card-visual img { background: #f3ead9; }
+.project-card.tone-shop .project-card-visual,
+.project-card.tone-shop .project-card-visual img { background: #f4ece4; }
+.project-card.tone-artist .project-card-visual,
+.project-card.tone-artist .project-card-visual img { background: #f7f5ef; }
 
 /* Couverture mobile : montrée entière comme un écran de téléphone posé
    sur fond sombre — jamais recadrée en tranche illisible. */
@@ -436,6 +446,19 @@ footer {
   gap: clamp(28px, 4vw, 70px);
   align-items: start;
 }
+.recognition-notes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line);
+}
+.recognition-notes article {
+  min-height: 230px;
+  padding: 22px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.recognition-notes article > p:not(.plate-ref) { margin-bottom: 14px; }
 .recognition-list { display: grid; border-top: 1px solid var(--line); }
 .recognition-list button {
   text-align: left;
@@ -471,8 +494,9 @@ footer {
 }
 .recognition-situation { font-size: 1.05rem; margin-bottom: 18px; }
 .recognition-response {
-  font: italic clamp(1.15rem, 1.8vw, 1.45rem)/1.5 var(--serif);
-  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 0 !important;
 }
 
 .services-summary { padding: clamp(60px, 8vw, 110px) var(--gutter); border-bottom: 1px solid var(--line); }
@@ -776,7 +800,6 @@ form .button { justify-content: center; width: 100%; }
   --muted: rgba(233, 228, 214, 0.55);
   --reveal-shift: 14px;
 }
-.case.tone-hotel [data-reveal] { transition-duration: 1.1s; }
 .case.tone-hotel .case-header h1 { font-style: italic; letter-spacing: -0.02em; }
 .gallery-traversee { max-width: 1180px; margin: 0 auto; }
 .gallery-traversee > div:nth-child(even) { justify-self: end; max-width: 82%; }
@@ -858,8 +881,6 @@ form .button { justify-content: center; width: 100%; }
 .gallery-affiche { max-width: 1240px; margin: 0 auto; }
 .gallery-affiche #version-mobile { justify-self: center; }
 
-/* Nounours et projets sans captures : récit typographique sobre. */
-.case.tone-story { --case-accent: #4a5f8a; }
 
 /* Boutons dans les thèmes sombres. */
 .case.tone-hotel .button.fill,
@@ -965,6 +986,7 @@ form .button { justify-content: center; width: 100%; }
   .hero-proof { max-width: 560px; }
   .project-card.featured { grid-template-columns: 1fr; align-items: start; }
   .recognition-body { grid-template-columns: 1fr; }
+  .recognition-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .diagnostic { grid-template-columns: 1fr; justify-items: start; }
   .about { grid-template-columns: 1fr; }
   .identity { position: static; min-height: 380px; }
@@ -987,7 +1009,7 @@ form .button { justify-content: center; width: 100%; }
   :root { --gutter: 20px; }
   .project-grid, .compact-grid { grid-template-columns: 1fr; }
   .tiers-row { grid-template-columns: 1fr; }
-  .facts { grid-template-columns: 1fr; }
+  .facts, .recognition-notes { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .method-list li { grid-template-columns: 1fr; gap: 10px; }
   .method-list li p { grid-column: auto; }

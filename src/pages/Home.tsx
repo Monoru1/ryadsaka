@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Layout } from '../components/layout/Layout'
 import { ProjectCard } from '../components/projects/ProjectCard'
@@ -32,13 +31,13 @@ export function Home() {
         <div className="section-head" data-reveal>
           <p className="eyebrow">Projets sélectionnés</p>
           <h2>
-            La même exigence.
+            Des sites qui ont une raison
             <br />
-            Jamais le même monde.
+            d’exister comme ils sont.
           </h2>
           <p className="section-note">
-            Chaque site ci-dessous est en ligne. Ouvrez-les, testez-les sur votre téléphone :
-            c’est la meilleure façon de juger.
+            Les six projets sont en ligne. Ouvrez-les, regardez les pages intérieures, passez sur
+            téléphone : c’est là que le travail se juge.
           </p>
         </div>
 
@@ -58,7 +57,7 @@ export function Home() {
 
         <div className="selected-foot" data-reveal>
           <Link className="text-link" to="/projets">
-            Tous les projets, y compris les expérimentations <Arrow />
+            Voir les six projets <Arrow />
           </Link>
         </div>
       </section>
@@ -70,7 +69,7 @@ export function Home() {
 
       <section className="closing" data-reveal>
         <p className="eyebrow">La suite vous appartient</p>
-        <h2>On peut faire plus qu’un site « propre ».</h2>
+        <h2>Votre activité n’a pas besoin d’un site de plus. Elle a besoin du bon.</h2>
         <p>
           Si votre activité mérite d’être mieux comprise, mieux désirée ou plus simple à
           contacter, commençons par regarder ce qui bloque aujourd’hui.
@@ -106,14 +105,14 @@ function Hero() {
     <section className="hero">
       <p className="eyebrow">{site.role} · {site.location}</p>
       <h1>
-        Je conçois des sites qui donnent envie de vous choisir.
+        Votre travail peut être solide et perdre des clients avant même le premier échange.
       </h1>
       <div className="hero-bottom">
         <div className="hero-pitch">
           <p>
-            Hôtels, restaurants, marques, artistes, indépendants : je prends en charge la
-            direction visuelle, le développement et la mise en ligne. Vous parlez à une seule
-            personne — celle qui fait le travail.
+            Je conçois les sites de bout en bout : positionnement, direction visuelle,
+            développement et mise en ligne. Le résultat doit être clair pour vos clients, pas
+            seulement beau dans un portfolio.
           </p>
           <div className="hero-actions">
             <Link className="button fill" to="/contact">
@@ -124,7 +123,7 @@ function Hero() {
             </Link>
           </div>
           <p className="hero-proof-line">
-            Six projets en ligne, consultables sur desktop et mobile — dont ceux-ci.
+            Six projets réels, consultables sur desktop, mobile et pages intérieures.
           </p>
         </div>
 
@@ -142,54 +141,25 @@ function Hero() {
 }
 
 function Recognition() {
-  const [active, setActive] = useState(0)
-  const current = problems[active]
-  const tier = tiers.find((t) => t.id === current.tierId)
-
   return (
     <section className="recognition">
       <div className="recognition-intro" data-reveal>
         <p className="eyebrow">Vous vous reconnaîtrez peut-être</p>
-        <h2>Les vrais problèmes ne sont jamais « il me faut un site ».</h2>
+        <h2>Un bon projet commence rarement par « il me faut un site ».</h2>
         <p className="lead">
-          Voici les situations que je rencontre le plus souvent. Si l’une d’elles vous ressemble,
-          vous savez déjà par où commencer la conversation.
+          Voici six situations concrètes. Si l’une vous ressemble, on peut parler de votre
+          activité avant de parler de pages ou de technologie.
         </p>
       </div>
 
-      <div className="recognition-body" data-reveal>
-        <div className="recognition-list" role="tablist" aria-label="Situations fréquentes">
-          {problems.map((p, i) => (
-            <button
-              key={p.id}
-              role="tab"
-              id={`problem-tab-${p.id}`}
-              aria-selected={i === active}
-              aria-controls="recognition-panel"
-              className={i === active ? 'active' : ''}
-              onClick={() => setActive(i)}
-            >
-              {p.label}
-            </button>
-          ))}
-        </div>
-
-        <div
-          className="recognition-panel"
-          id="recognition-panel"
-          role="tabpanel"
-          aria-labelledby={`problem-tab-${current.id}`}
-        >
-          <p className="plate-ref">Situation</p>
-          <p className="recognition-situation">{current.situation}</p>
-          <p className="plate-ref">Ce qu’on ferait</p>
-          <p className="recognition-response">{current.response}</p>
-          {tier && (
-            <Link className="text-link" to="/services">
-              Format probable : {tier.name} — {tier.price} <Arrow />
-            </Link>
-          )}
-        </div>
+      <div className="recognition-body recognition-notes" data-reveal>
+        {problems.map((problem, index) => (
+          <article key={problem.id}>
+            <p className="plate-ref">0{index + 1} · {problem.label}</p>
+            <p>{problem.situation}</p>
+            <p className="recognition-response">{problem.response}</p>
+          </article>
+        ))}
       </div>
     </section>
   )

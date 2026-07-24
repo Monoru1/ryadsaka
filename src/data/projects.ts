@@ -1,4 +1,4 @@
-export type Tone = 'hotel' | 'museum' | 'restaurant' | 'shop' | 'artist' | 'street' | 'story'
+export type Tone = 'hotel' | 'museum' | 'restaurant' | 'shop' | 'artist' | 'street'
 
 export type Screen = {
   src: string
@@ -433,37 +433,6 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Vite'],
     status:
       'Le e-commerce complet est une suite possible ; la précommande directe suffit à la phase de lancement.',
-    featured: false,
-  },
-  {
-    slug: 'nounours',
-    title: 'Inspecteur Nounours',
-    nature: 'Cadeau interactif — projet privé',
-    sector: 'Récit interactif',
-    year: '2026',
-    tone: 'story',
-    summary:
-      'Un cadeau d’anniversaire transformé en enquête à explorer : indices, personnages et surprises.',
-    context:
-      'Un anniversaire méritait mieux qu’une carte. Inspecteur Nounours est une petite enquête interactive, écrite et développée pour une seule personne.',
-    challenge:
-      'Faire sourire et surprendre avec les moyens du web : du rythme, des indices, des transitions qui participent au récit.',
-    decisions: [
-      {
-        title: 'Le récit commande la technique',
-        text:
-          'Chaque interaction existe parce que l’histoire en a besoin — jamais l’inverse. C’est un bon exercice de discipline pour tous les autres projets.',
-      },
-    ],
-    built: [
-      'Enquête interactive complète avec indices et personnages',
-      'Transitions et interactions écrites pour le récit',
-      'Expérience entièrement responsive',
-    ],
-    screens: [],
-    stack: ['React', 'TypeScript'],
-    status:
-      'Projet privé, non public — il montre surtout que la narration interactive fait partie de la palette.',
     featured: false,
   },
 ]

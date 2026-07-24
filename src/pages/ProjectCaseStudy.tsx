@@ -21,7 +21,6 @@ const toneConfig: Record<
   shop: { refWord: 'RAYON', gallery: 'boutique' },
   artist: { refWord: 'PLANCHE', gallery: 'atelier' },
   street: { refWord: 'ARCHIVE', gallery: 'affiche' },
-  story: { refWord: 'CHAPITRE', gallery: 'atelier' },
 }
 
 const pad = (n: number) => String(n).padStart(2, '0')
