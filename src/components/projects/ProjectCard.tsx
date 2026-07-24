@@ -40,17 +40,8 @@ export function ProjectCard({
             alt={cover.alt}
             className={cover.kind === 'mobile' ? 'is-mobile-cover' : undefined}
             loading={eager ? 'eager' : 'lazy'}
-            decoding="async"
+            decoding={eager ? 'sync' : 'async'}
           />
-          {variant === 'featured' && mobile && cover !== mobile && (
-            <img
-              className="project-card-mobile"
-              src={mobile.src}
-              alt={mobile.alt}
-              loading={eager ? 'eager' : 'lazy'}
-              decoding="async"
-            />
-          )}
         </Link>
       ) : (
         <Link
