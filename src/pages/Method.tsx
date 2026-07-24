@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Layout } from '../components/layout/Layout'
-import { Arrow } from '../components/ui/Arrow'
 import { usePageMeta } from '../hooks/usePageMeta'
 
 const steps: Array<[string, string]> = [
@@ -10,7 +9,7 @@ const steps: Array<[string, string]> = [
   ],
   [
     'Donner une direction',
-    'Je pose le ton, les priorités et le parcours du visiteur avant de choisir le moindre effet. Vous validez une intention claire, pas un jargon.',
+    'Je pose le ton, les priorités et le chemin du visiteur avant de choisir le moindre effet. Vous validez une intention claire, pas un jargon.',
   ],
   [
     'Concevoir et construire',
@@ -47,7 +46,7 @@ export function Method() {
 
       <ol className="method-list">
         {steps.map(([title, copy], i) => (
-          <li key={title} data-reveal>
+          <li key={title}>
             <span className="plate-ref">Étape {i + 1}</span>
             <h2>{title}</h2>
             <p>{copy}</p>
@@ -55,13 +54,13 @@ export function Method() {
         ))}
       </ol>
 
-      <section className="method-cta" data-reveal>
+      <section className="method-cta">
         <h2>
           Une idée floue, un site à refaire, ou juste un problème à résoudre ? C’est suffisant
           pour démarrer la discussion.
         </h2>
         <Link className="text-link" to="/contact">
-          Me raconter la situation <Arrow />
+          Me raconter la situation
         </Link>
       </section>
     </Layout>

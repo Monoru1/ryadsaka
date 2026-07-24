@@ -1,6 +1,5 @@
 import { FormEvent, useState } from 'react'
 import { site } from '../../data/site'
-import { Arrow } from '../ui/Arrow'
 
 const existingOptions = [
   'Rien pour l’instant — je pars de zéro',
@@ -77,7 +76,7 @@ export function ContactForm({ diagnostic = false }: { diagnostic?: boolean }) {
           Si votre message est parti en fin de semaine, comptez le début de la semaine suivante.
         </p>
         <a className="button fill" href={`mailto:${site.email}`}>
-          Ajouter un détail par e-mail <Arrow />
+          Ajouter un détail par e-mail
         </a>
       </div>
     )
@@ -202,7 +201,7 @@ export function ContactForm({ diagnostic = false }: { diagnostic?: boolean }) {
       )}
 
       <button className="button fill" type="submit" disabled={status === 'sending'}>
-        {status === 'sending' ? 'Envoi en cours…' : 'Envoyer ma demande'} <Arrow />
+        {status === 'sending' ? 'Envoi en cours…' : 'Envoyer ma demande'}
       </button>
     </form>
   )

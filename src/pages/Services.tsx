@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Layout } from '../components/layout/Layout'
-import { Arrow } from '../components/ui/Arrow'
 import { getProject } from '../data/projects'
 import { clientProvides, delivered, pricingFactors, tiers } from '../data/services'
 import { usePageMeta } from '../hooks/usePageMeta'
@@ -9,7 +8,7 @@ export function Services() {
   usePageMeta({
     title: 'Services & tarifs — Ryad Saka',
     description:
-      'Trois formats de mission : présence essentielle à partir de 600 €, site signature à partir de 1 500 €, expérience ou outil sur mesure sur devis. Périmètre écrit avant de commencer.',
+      'Trois formats de mission : présence essentielle à partir de 600 €, site signature à partir de 1 500 €, outil ou site sur mesure sur devis. Périmètre écrit avant de commencer.',
     path: '/services',
   })
 
@@ -32,7 +31,7 @@ export function Services() {
             .filter((p): p is NonNullable<typeof p> => Boolean(p))
 
           return (
-            <article key={tier.id} className="tier" id={tier.id} data-reveal>
+            <article key={tier.id} className="tier" id={tier.id}>
               <header className="tier-head">
                 <h2>{tier.name}</h2>
                 <div className="tier-pricing">
@@ -60,7 +59,7 @@ export function Services() {
                     <p className="plate-ref">Pour voir ce que ça donne</p>
                     {examples.map((p) => (
                       <Link key={p.slug} className="text-link" to={`/projets/${p.slug}`}>
-                        {p.title} <Arrow />
+                        {p.title}
                       </Link>
                     ))}
                   </div>
@@ -68,7 +67,7 @@ export function Services() {
               </div>
 
               <Link className="button fill" to="/contact">
-                En parler <Arrow />
+                En parler
               </Link>
             </article>
           )
@@ -76,7 +75,7 @@ export function Services() {
       </section>
 
       <section className="service-details">
-        <div data-reveal>
+        <div>
           <p className="plate-ref">Ce qui influence le prix</p>
           <ul>
             {pricingFactors.map((f) => (
@@ -84,7 +83,7 @@ export function Services() {
             ))}
           </ul>
         </div>
-        <div data-reveal>
+        <div>
           <p className="plate-ref">Ce que vous apportez</p>
           <ul>
             {clientProvides.map((f) => (
@@ -92,7 +91,7 @@ export function Services() {
             ))}
           </ul>
         </div>
-        <div data-reveal>
+        <div>
           <p className="plate-ref">Ce qui est livré</p>
           <ul>
             {delivered.map((f) => (
@@ -102,7 +101,7 @@ export function Services() {
         </div>
       </section>
 
-      <section className="service-note" data-reveal>
+      <section className="service-note">
         <p>
           Les délais sont des estimations honnêtes, pas des garanties : ils dépendent aussi de
           la vitesse de vos retours. Les montants « à partir de » correspondent aux versions les
@@ -110,7 +109,7 @@ export function Services() {
           compris votre besoin — jamais avant.
         </p>
         <Link className="button fill" to="/contact">
-          Demander une première estimation <Arrow />
+          Demander une première estimation
         </Link>
       </section>
     </Layout>
