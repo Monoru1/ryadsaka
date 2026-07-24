@@ -1067,8 +1067,11 @@ form .button { width: 100%; }
     min-width: 40px;
     padding: 7px 10px !important;
   }
-  .nav-contact {
-    margin-top: 10px;
+  .site-header nav .nav-contact {
+    margin-top: 14px;
+    padding: 12px 16px !important;
+    background: var(--pine) !important;
+    color: var(--paper);
     font: 500 15px var(--sans) !important;
   }
 
