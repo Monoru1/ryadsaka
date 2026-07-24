@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Project } from '../../data/projects'
-import { Arrow } from '../ui/Arrow'
 
 type Variant = 'featured' | 'standard' | 'compact'
 
@@ -23,7 +22,7 @@ export function ProjectCard({
   const cover = showMobile && mobile ? mobile : (desktop ?? mobile)
 
   return (
-    <article className={`project-card ${variant} tone-${project.tone}`} data-reveal>
+    <article className={`project-card ${variant} tone-${project.tone}`}>
       {cover ? (
         <Link
           to={`/projets/${project.slug}`}
@@ -64,11 +63,11 @@ export function ProjectCard({
         {variant !== 'compact' && <p className="project-card-summary">{project.summary}</p>}
         <div className="project-card-actions">
           <Link className="text-link" to={`/projets/${project.slug}`}>
-            Voir l’étude de cas <Arrow />
+            Voir l’étude de cas
           </Link>
           {project.url && (
             <a className="text-link quiet" href={project.url} target="_blank" rel="noreferrer">
-              Ouvrir le site <Arrow />
+              Ouvrir le site
             </a>
           )}
         </div>

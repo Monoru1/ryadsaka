@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Layout } from '../components/layout/Layout'
-import { Arrow } from '../components/ui/Arrow'
 import { site } from '../data/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 
@@ -42,7 +41,7 @@ export function About() {
             si un détail me gêne, je le corrige avant que vous ayez à le remarquer.
           </p>
           <Link className="button fill" to="/contact">
-            Travailler ensemble <Arrow />
+            Travailler ensemble
           </Link>
         </div>
 
@@ -60,7 +59,7 @@ export function About() {
         </div>
       </section>
 
-      <section className="about-strip" data-reveal>
+      <section className="about-strip">
         <p>
           Technologie, création, résolution de problèmes : je ne les traite pas comme trois
           métiers séparés — et vos visiteurs sentent la différence.

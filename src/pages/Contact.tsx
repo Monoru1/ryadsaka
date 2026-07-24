@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { Layout } from '../components/layout/Layout'
 import { ContactForm } from '../components/contact/ContactForm'
-import { Arrow } from '../components/ui/Arrow'
 import { site } from '../data/site'
 import { usePageMeta } from '../hooks/usePageMeta'
 
@@ -34,7 +33,7 @@ export function Contact() {
               : 'Dites-moi simplement ce que vous faites, ce qui vous gêne et ce que vous aimeriez rendre plus simple. Je vous répondrai avec des questions utiles, pas avec une proposition automatique.'}
           </p>
           <a className="text-link" href={`mailto:${site.email}`}>
-            Ou écrire directement à {site.email} <Arrow />
+            Ou écrire directement à {site.email}
           </a>
           <div className="contact-facts">
             <p className="plate-ref">Comment ça se passe ensuite</p>

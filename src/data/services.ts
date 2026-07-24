@@ -39,7 +39,7 @@ export const tiers: ServiceTier[] = [
     id: 'signature',
     name: 'Site signature',
     audience:
-      'Activités et marques qui ont besoin d’une identité forte, de plusieurs pages et d’un vrai parcours visiteur.',
+      'Activités et marques qui ont besoin d’une identité forte, de plusieurs pages et d’un site qui mène quelque part.',
     promise:
       'Un site qui installe une atmosphère, raconte votre singularité et transforme la visite en prise de contact.',
     includes: [
@@ -60,11 +60,11 @@ export const tiers: ServiceTier[] = [
     id: 'sur-mesure',
     name: 'Expérience ou outil sur mesure',
     audience:
-      'Boutiques, catalogues, projets avec espace d’administration, automatisations ou expériences interactives.',
+      'Boutiques, catalogues, projets avec espace d’administration, automatisations ou fonctionnalités interactives.',
     promise:
-      'Au-delà de la vitrine : un outil que vous utilisez au quotidien, ou une expérience qu’on n’oublie pas.',
+      'Au-delà de la vitrine : un outil que vous utilisez au quotidien, ou un site dont on se souvient.',
     includes: [
-      'Interfaces complexes ou immersives',
+      'Interfaces complexes (3D, animation, catalogue avancé)',
       'Gestion de contenu : vous mettez à jour sans dépendre de moi',
       'Paiements, commandes ou réservations avancées',
       'Espace d’administration adapté à votre quotidien',

@@ -11,6 +11,14 @@ export type Screen = {
 
 export type Decision = { title: string; text: string }
 
+export type PageShot = {
+  src: string
+  alt: string
+  /** Nom de la page telle qu'elle existe sur le site : Accueil, Menu, Catalogue… */
+  label: string
+  note?: string
+}
+
 export type Project = {
   slug: string
   title: string
@@ -28,6 +36,8 @@ export type Project = {
   /** Ce qui a été réellement construit et qui est vérifiable en ouvrant le site. */
   built: string[]
   screens: Screen[]
+  /** Pages complètes du site, affichées dans des fenêtres défilables. */
+  pages?: PageShot[]
   stack: string[]
   /** Limites ou suites honnêtes, si utile. */
   status?: string
@@ -67,7 +77,7 @@ export const projects: Project[] = [
       },
     ],
     built: [
-      'Parcours d’accueil en huit scènes traversant la demeure',
+      'Page d’accueil en huit scènes qui traversent la demeure',
       'Pages dédiées : maison, suites, cabinet, bains, jardin, nuit, journal',
       'Parcours de réservation complet, cohérent avec l’univers',
       'Version mobile pensée pour conserver la respiration du site',
@@ -83,7 +93,7 @@ export const projects: Project[] = [
       },
       {
         src: '/projects/saint-jules/detail-1.webp',
-        alt: 'Page des suites de Maison Saint-Jules, présentation immersive des chambres',
+        alt: 'Page des suites de Maison Saint-Jules, les chambres présentées une à une',
         kind: 'detail',
         caption: 'Les suites — présentées comme des pièces, pas comme un inventaire',
       },
@@ -99,6 +109,19 @@ export const projects: Project[] = [
         alt: 'Version mobile de Maison Saint-Jules',
         kind: 'mobile',
         caption: 'Sur téléphone, la traversée reste une traversée',
+      },
+    ],
+    pages: [
+      {
+        src: '/projects/saint-jules/full-suites.webp',
+        alt: 'Page « Suites » complète du site Maison Saint-Jules',
+        label: 'Les suites — page complète',
+        note: 'des pièces, pas un inventaire',
+      },
+      {
+        src: '/projects/saint-jules/full-reservation.webp',
+        alt: 'Parcours de réservation complet du site Maison Saint-Jules',
+        label: 'La réservation — page complète',
       },
     ],
     stack: ['React', 'TypeScript', 'Vite'],
@@ -169,6 +192,19 @@ export const projects: Project[] = [
         caption: 'La visite tient dans la poche',
       },
     ],
+    pages: [
+      {
+        src: '/projects/vortex/full-collections.webp',
+        alt: 'Page « Collections » complète du site Vortex, avec les quatre salles',
+        label: 'Les collections — page complète',
+        note: 'quatre salles, quatre accrochages',
+      },
+      {
+        src: '/projects/vortex/full-vehicule.webp',
+        alt: 'Fiche complète de la Ferrari F40 sur le site Vortex',
+        label: 'Fiche Ferrari F40 — page complète',
+      },
+    ],
     stack: ['React', 'TypeScript', 'Vite'],
     featured: true,
   },
@@ -235,6 +271,19 @@ export const projects: Project[] = [
         alt: 'Version mobile du site du restaurant Héritage',
         kind: 'mobile',
         caption: 'Le format où un restaurant se choisit vraiment',
+      },
+    ],
+    pages: [
+      {
+        src: '/projects/heritage/full-accueil.webp',
+        alt: 'Page d’accueil complète du restaurant Héritage, du haut jusqu’au pied de page',
+        label: 'L’accueil — page complète',
+        note: 'le service, du seuil au dessert',
+      },
+      {
+        src: '/projects/heritage/full-menu.webp',
+        alt: 'Page menu complète du restaurant Héritage',
+        label: 'Le menu — page complète',
       },
     ],
     stack: ['React', 'TypeScript', 'Vite', 'Supabase'],
@@ -305,6 +354,19 @@ export const projects: Project[] = [
         caption: 'La boutique dans le téléphone, où elle se vit vraiment',
       },
     ],
+    pages: [
+      {
+        src: '/projects/pyjamas/full-accueil.webp',
+        alt: 'Page d’accueil complète de La Maison des Pyjamas',
+        label: 'La vitrine — page complète',
+      },
+      {
+        src: '/projects/pyjamas/full-catalogue.webp',
+        alt: 'Page catalogue complète de La Maison des Pyjamas',
+        label: 'Le catalogue — page complète',
+        note: 'rangé par moments, pas par références',
+      },
+    ],
     stack: ['React', 'TypeScript', 'Supabase'],
     status:
       'Le paiement en ligne est prévu comme prochaine étape ; la commande passe aujourd’hui par WhatsApp, volontairement.',
@@ -343,7 +405,7 @@ export const projects: Project[] = [
     ],
     built: [
       'Sept collections d’œuvres organisées et navigables',
-      'Pages œuvres et parcours de découverte',
+      'Pages œuvres et pages de détail',
       'Version mobile traitée en priorité',
       'Liens directs vers l’Instagram et le Facebook de l’artiste',
       'Identité éditoriale sobre au service des œuvres',
@@ -367,6 +429,13 @@ export const projects: Project[] = [
         kind: 'mobile',
         caption: 'Le format Instagram → portfolio, sans friction',
         note: 'le mobile est le cas principal, pas l’exception',
+      },
+    ],
+    pages: [
+      {
+        src: '/projects/emma/full-accueil.webp',
+        alt: 'Page d’accueil complète du portfolio emma.illustre',
+        label: 'L’accueil — page complète',
       },
     ],
     stack: ['React', 'TypeScript', 'Vite'],
@@ -428,6 +497,19 @@ export const projects: Project[] = [
         alt: 'Version mobile du site ZION',
         kind: 'mobile',
         caption: 'L’affiche tient debout, même en format poche',
+      },
+    ],
+    pages: [
+      {
+        src: '/projects/zion/full-accueil.webp',
+        alt: 'Page manifeste complète du site ZION',
+        label: 'Le manifeste — page complète',
+        note: 'la déclaration se lit en entier',
+      },
+      {
+        src: '/projects/zion/full-boutique.webp',
+        alt: 'Page boutique complète du site ZION avec la précommande BUZZOFF',
+        label: 'La boutique — page complète',
       },
     ],
     stack: ['React', 'TypeScript', 'Vite'],

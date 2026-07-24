@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Arrow } from '../ui/Arrow'
 
 const links = [
   { to: '/projets', label: 'Projets' },
@@ -66,7 +65,7 @@ export function Header() {
           </NavLink>
         ))}
         <NavLink className="nav-contact" to="/contact">
-          Parler du projet <Arrow />
+          Parler du projet
         </NavLink>
       </nav>
     </header>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Layout } from '../components/layout/Layout'
 import { Plate } from '../components/ui/Plate'
-import { Arrow } from '../components/ui/Arrow'
+import { Window } from '../components/ui/Window'
 import { Project, Tone, projects } from '../data/projects'
 import { tiers } from '../data/services'
 import { usePageMeta } from '../hooks/usePageMeta'
@@ -55,7 +55,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           <div className="case-actions">
             {project.url && (
               <a className="button outline" href={project.url} target="_blank" rel="noreferrer">
-                Ouvrir le site <Arrow />
+                Ouvrir le site
               </a>
             )}
             {project.screens.some((s) => s.kind === 'mobile') && (
@@ -67,29 +67,27 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
         </header>
 
         {cover && (
-          <div className="case-cover" data-reveal>
+          <div className="case-cover">
             <Plate screen={cover} reference={`${config.refWord} 01`} eager />
           </div>
         )}
 
         <section className="case-story">
-          <div data-reveal>
+          <div>
             <p className="plate-ref">Le contexte</p>
             <p className="case-text">{project.context}</p>
           </div>
-          <div data-reveal>
+          <div>
             <p className="plate-ref">Le défi</p>
             <h2>{project.challenge}</h2>
           </div>
         </section>
 
         <section className="case-decisions">
-          <p className="eyebrow" data-reveal>
-            Les décisions qui comptent
-          </p>
+          <p className="eyebrow">Les décisions qui comptent</p>
           <div className="decisions-list">
             {project.decisions.map((d) => (
-              <div className="decision" key={d.title} data-reveal>
+              <div className="decision" key={d.title}>
                 <h3>{d.title}</h3>
                 <p>{d.text}</p>
               </div>
@@ -102,7 +100,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             {rest.map((screen, i) => (
               <div
                 key={screen.src}
-                data-reveal
                 id={screen.kind === 'mobile' ? 'version-mobile' : undefined}
               >
                 <Plate screen={screen} reference={`${config.refWord} ${pad(i + 2)}`} />
@@ -111,7 +108,27 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           </section>
         )}
 
-        <section className="case-facts" data-reveal>
+        {project.pages && project.pages.length > 0 && (
+          <section className="case-pages">
+            <div className="section-head">
+              <p className="eyebrow">Les pages, en entier</p>
+              <h2>Rien n’est recadré ici : ces pages se font défiler comme sur le site.</h2>
+            </div>
+            <div className="case-pages-grid">
+              {project.pages.map((page) => (
+                <figure className="plate" key={page.src}>
+                  <Window src={page.src} alt={page.alt} />
+                  <figcaption>
+                    <span className="plate-ref">{page.label}</span>
+                    {page.note && <span className="plate-note">{page.note}</span>}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="case-facts">
           <div>
             <p className="plate-ref">Ce qui est en ligne et vérifiable</p>
             <ul>
@@ -128,29 +145,29 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               <>
                 <p className="plate-ref">Format le plus proche</p>
                 <Link className="text-link" to="/services">
-                  {relatedTier.name} — {relatedTier.price} <Arrow />
+                  {relatedTier.name} — {relatedTier.price}
                 </Link>
               </>
             )}
             {project.url && (
               <a className="text-link" href={project.url} target="_blank" rel="noreferrer">
-                Ouvrir {project.title} <Arrow />
+                Ouvrir {project.title}
               </a>
             )}
           </div>
         </section>
 
-        <section className="case-next" data-reveal>
+        <section className="case-next">
           <div>
             <p>Votre projet n’a pas à ressembler à celui-ci — c’est le principe.</p>
             <Link className="button fill" to="/contact">
-              Imaginer le vôtre <Arrow />
+              Imaginer le vôtre
             </Link>
           </div>
           <Link className="case-next-project" to={`/projets/${next.slug}`}>
             <span className="plate-ref">Projet suivant</span>
             <b>{next.title}</b>
-            <Arrow />
+           
           </Link>
         </section>
       </article>

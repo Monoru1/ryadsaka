@@ -49,7 +49,7 @@ export const problems: Problem[] = [
     situation:
       'Le site fonctionne, mais il ne ressemble à rien de particulier. Remplacez le logo par celui d’un concurrent : personne ne verrait la différence.',
     response:
-      'On construit un univers qui n’appartient qu’à vous — regardez comme Saint-Jules, Héritage et ZION ne se ressemblent pas. C’est le même développeur, mais jamais le même monde.',
+      'Regardez Saint-Jules, Héritage et ZION : même développeur, jamais le même monde. Votre site n’a pas à ressembler à celui d’à côté.',
     tierId: 'signature',
   },
   {
