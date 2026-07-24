@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://ryadsaka.netlify.app/sitemap.xml

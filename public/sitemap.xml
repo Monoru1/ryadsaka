@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ryadsaka.dev/</loc></url>
-  <url><loc>https://ryadsaka.dev/projets</loc></url>
-  <url><loc>https://ryadsaka.dev/services</loc></url>
-  <url><loc>https://ryadsaka.dev/methode</loc></url>
-  <url><loc>https://ryadsaka.dev/a-propos</loc></url>
-  <url><loc>https://ryadsaka.dev/contact</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/projets</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/projets/saint-jules</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/projets/vortex</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/projets/heritage</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/projets/pyjamas</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/projets/emma</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/projets/zion</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/projets/nounours</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/services</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/methode</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/a-propos</loc></url>
+  <url><loc>https://ryadsaka.netlify.app/contact</loc></url>
 </urlset>
