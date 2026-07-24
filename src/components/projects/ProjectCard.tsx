@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Project } from '../../data/projects'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 type Variant = 'featured' | 'standard' | 'compact'
 
@@ -17,6 +18,7 @@ export function ProjectCard({
   showMobile = false,
   eager = false,
 }: ProjectCardProps) {
+  const { href, isEnglish } = useLanguage()
   const desktop = project.screens.find((s) => s.kind === 'desktop')
   const mobile = project.screens.find((s) => s.kind === 'mobile')
   const cover = showMobile && mobile ? mobile : (desktop ?? mobile)
@@ -25,9 +27,13 @@ export function ProjectCard({
     <article className={`project-card ${variant} tone-${project.tone}`}>
       {cover ? (
         <Link
-          to={`/projets/${project.slug}`}
+          to={href(`/projets/${project.slug}`)}
           className="project-card-visual"
-          aria-label={`Voir l’étude de cas : ${project.title}`}
+          aria-label={
+            isEnglish
+              ? `Read the ${project.title} case study`
+              : `Voir l’étude de cas : ${project.title}`
+          }
         >
           <img
             src={cover.src}
@@ -47,7 +53,10 @@ export function ProjectCard({
           )}
         </Link>
       ) : (
-        <Link to={`/projets/${project.slug}`} className="project-card-visual is-typographic">
+        <Link
+          to={href(`/projets/${project.slug}`)}
+          className="project-card-visual is-typographic"
+        >
           <span>{project.sector}</span>
           <b>{project.title}</b>
         </Link>
@@ -58,16 +67,16 @@ export function ProjectCard({
           {project.nature} · {project.sector}
         </p>
         <h3>
-          <Link to={`/projets/${project.slug}`}>{project.title}</Link>
+          <Link to={href(`/projets/${project.slug}`)}>{project.title}</Link>
         </h3>
         {variant !== 'compact' && <p className="project-card-summary">{project.summary}</p>}
         <div className="project-card-actions">
-          <Link className="text-link" to={`/projets/${project.slug}`}>
-            Voir l’étude de cas
+          <Link className="text-link" to={href(`/projets/${project.slug}`)}>
+            {isEnglish ? 'Read the case study' : 'Voir l’étude de cas'}
           </Link>
           {project.url && (
             <a className="text-link quiet" href={project.url} target="_blank" rel="noreferrer">
-              Ouvrir le site
+              {isEnglish ? 'Open the website' : 'Ouvrir le site'}
             </a>
           )}
         </div>

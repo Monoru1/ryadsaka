@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Archivo:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap');
-
 /* ==========================================================================
    1. Fondations
-   Corps de texte en serif éditorial (Newsreader), interface en Archivo,
-   cartouches techniques en Spline Sans Mono — réservés aux planches.
+   Onest porte la conversation et l’interface. Lora signe le portfolio.
+   Bodoni Moda, Barlow Condensed et Syne n’apparaissent que lorsqu’un
+   univers projet le justifie. Les cartouches restent en mono système.
    ========================================================================== */
 
 :root {
@@ -16,9 +15,14 @@
   --muted: #5d665f;
   --line: rgba(29, 34, 31, 0.16);
   --line-strong: rgba(29, 34, 31, 0.4);
-  --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-  --sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --mono: 'Spline Sans Mono', 'SF Mono', monospace;
+  --display: 'Lora Variable', 'Iowan Old Style', Georgia, serif;
+  --body: 'Onest Variable', 'Helvetica Neue', Arial, sans-serif;
+  --luxury: 'Bodoni Moda Variable', Didot, 'Times New Roman', serif;
+  --industrial: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --street: 'Syne Variable', 'Arial Black', sans-serif;
+  --serif: var(--display);
+  --sans: var(--body);
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
   --gutter: 4vw;
 }
 
@@ -30,10 +34,10 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: 17px;
-  line-height: 1.6;
-  font-weight: 400;
+  font-family: var(--body);
+  font-size: 16.5px;
+  line-height: 1.65;
+  font-weight: 420;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -48,9 +52,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 h1, h2, h3, p, ul, ol, figure { margin-top: 0; }
 
 h1, h2, h3 {
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 500;
   font-variation-settings: 'opsz' 60;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.025em;
 }
 
 ::selection { background: var(--pine); color: var(--paper); }
@@ -203,6 +208,26 @@ h1, h2, h3 {
 .nav-contact { background: var(--pine); color: var(--paper); padding: 11px 16px; transition: background-color 0.18s; }
 .nav-contact:hover { background: var(--pine-deep); }
 .nav-contact.active { background: var(--pine-deep); }
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  border: 1px solid var(--line-strong);
+  padding: 3px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+.language-switch a,
+.language-switch span {
+  min-width: 30px;
+  padding: 5px 7px !important;
+  text-align: center;
+  background-image: none !important;
+}
+.language-switch span[aria-current='page'] {
+  background: var(--ink);
+  color: var(--paper);
+}
 
 .menu-button {
   display: none;
@@ -262,7 +287,7 @@ footer {
   font-size: 14.5px;
 }
 .plate figcaption .plate-ref { margin: 0; }
-.plate-caption { color: var(--ink); }
+.plate-caption { color: currentColor; }
 .plate-note {
   font: italic 400 16px var(--serif);
   color: var(--clay);
@@ -402,10 +427,16 @@ footer {
   color: #e9e4d6;
   --line: rgba(233, 228, 214, 0.16);
   --line-strong: rgba(233, 228, 214, 0.4);
+  --muted: rgba(233, 228, 214, 0.7);
 }
 .folio-entry.f-hotel .folio-meta,
 .folio-entry.f-hotel .plate-ref { color: rgba(233, 228, 214, 0.55); }
-.folio-entry.f-hotel h3 { font-style: italic; color: #cfa960; }
+.folio-entry.f-hotel h3 {
+  font-family: var(--luxury);
+  font-style: italic;
+  font-weight: 500;
+  color: #e0bd73;
+}
 .folio-entry.f-hotel .folio-body {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -431,14 +462,15 @@ footer {
   color: #f1efe9;
   --line: rgba(241, 239, 233, 0.14);
   --line-strong: rgba(241, 239, 233, 0.36);
+  --muted: rgba(241, 239, 233, 0.72);
 }
 .folio-entry.f-museum .folio-meta { color: rgba(241, 239, 233, 0.5); }
 .folio-entry.f-museum h3 {
-  font-family: var(--sans);
+  font-family: var(--industrial);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  font-size: clamp(1.7rem, 3.2vw, 2.9rem);
+  letter-spacing: 0.04em;
+  font-size: clamp(2.1rem, 4vw, 3.8rem);
 }
 .folio-entry.f-museum .folio-body {
   display: grid;
@@ -451,7 +483,12 @@ footer {
 
 /* 03 — Héritage : crème chaude, la carte se lit comme au restaurant. */
 .folio-entry.f-restaurant { background: #f3ead8; }
-.folio-entry.f-restaurant h3 { font-style: italic; color: #8c2f22; }
+.folio-entry.f-restaurant h3 {
+  font-family: var(--luxury);
+  font-style: italic;
+  font-weight: 500;
+  color: #7b251c;
+}
 .folio-entry.f-restaurant .folio-body {
   display: grid;
   grid-template-columns: minmax(260px, 420px) 1fr;
@@ -463,7 +500,12 @@ footer {
 
 /* 04 — Pyjamas : boutique claire, deux rayons côte à côte. */
 .folio-entry.f-shop { background: #f5ede5; }
-.folio-entry.f-shop h3 { color: #7d2233; }
+.folio-entry.f-shop h3 {
+  font-family: var(--body);
+  font-weight: 760;
+  letter-spacing: -0.04em;
+  color: #721c30;
+}
 .folio-entry.f-shop .folio-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -476,6 +518,11 @@ footer {
 
 /* 05 — Emma : papier clair, un tirage encadré, centré. */
 .folio-entry.f-artist { background: #f8f6f0; }
+.folio-entry.f-artist h3 {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 500;
+}
 .folio-entry.f-artist .folio-body {
   display: grid;
   grid-template-columns: minmax(260px, 400px) 1fr;
@@ -495,15 +542,16 @@ footer {
   color: #efe8d8;
   --line: rgba(239, 232, 216, 0.16);
   --line-strong: rgba(239, 232, 216, 0.4);
+  --muted: rgba(239, 232, 216, 0.72);
 }
 .folio-entry.f-street .folio-meta { color: rgba(239, 232, 216, 0.5); }
 .folio-entry.f-street h3 {
-  font-family: var(--sans);
-  font-weight: 600;
+  font-family: var(--street);
+  font-weight: 760;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #d4af37;
-  font-size: clamp(1.7rem, 3.2vw, 2.9rem);
+  letter-spacing: -0.025em;
+  color: #e0bd49;
+  font-size: clamp(2rem, 3.8vw, 3.5rem);
 }
 .folio-entry.f-street .folio-body {
   display: grid;
@@ -724,17 +772,19 @@ footer {
   border: 1px solid var(--line-strong);
   background: var(--pine);
   color: var(--paper);
-  min-height: 440px;
+  min-height: 500px;
   display: grid;
   grid-template-rows: 1fr auto;
   position: sticky;
   top: 30px;
 }
-.identity-initials {
-  font: italic 400 clamp(5.6rem, 9vw, 9rem)/1 var(--serif);
-  display: grid;
-  place-content: center;
-  letter-spacing: -0.04em;
+.identity-photo {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+  object-position: center;
+  background: var(--paper);
 }
 .identity-notes {
   border-top: 1px solid rgba(236, 232, 221, 0.25);
@@ -743,7 +793,7 @@ footer {
   gap: 10px;
 }
 .identity-notes .plate-ref { color: rgba(236, 232, 221, 0.55); }
-.identity-notes em { font: italic 400 17px var(--serif); }
+.identity-notes em { font: italic 500 17px var(--display); }
 .identity-meta {
   font: 500 10.5px var(--sans);
   letter-spacing: 0.12em;
@@ -966,6 +1016,10 @@ form .button { width: 100%; }
   --muted: rgba(233, 228, 214, 0.55);
 }
 .case.tone-hotel .case-header h1 { font-style: italic; }
+.case.tone-hotel .case-header h1 {
+  font-family: var(--luxury);
+  font-weight: 500;
+}
 .gallery-traversee { max-width: 1160px; margin: 0 auto; }
 .gallery-traversee > div:nth-child(even) { justify-self: end; max-width: 82%; }
 .gallery-traversee > div:nth-child(odd) { max-width: 92%; }
@@ -979,12 +1033,12 @@ form .button { width: 100%; }
   --muted: rgba(241, 239, 233, 0.55);
 }
 .case.tone-museum .case-header h1 {
-  font-family: var(--sans);
+  font-family: var(--industrial);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.01em;
-  font-size: clamp(2.2rem, 5.4vw, 5.2rem);
-  line-height: 0.98;
+  letter-spacing: 0.035em;
+  font-size: clamp(2.8rem, 6.6vw, 6.4rem);
+  line-height: 0.9;
 }
 .gallery-galerie { grid-template-columns: repeat(2, 1fr); align-items: start; }
 .gallery-galerie > div:last-child { grid-column: 1 / -1; justify-self: center; }
@@ -994,7 +1048,11 @@ form .button { width: 100%; }
   --case-accent: #8c2f22;
   --paper-soft: #f8f2e5;
 }
-.case.tone-restaurant .case-header h1 { font-style: italic; }
+.case.tone-restaurant .case-header h1 {
+  font-family: var(--luxury);
+  font-style: italic;
+  font-weight: 500;
+}
 .gallery-service { max-width: 1220px; margin: 0 auto; }
 .gallery-service > div { display: grid; }
 .gallery-service > div:nth-child(odd) { justify-items: start; max-width: 88%; }
@@ -1004,12 +1062,21 @@ form .button { width: 100%; }
   --case-bg: #f5ede5;
   --case-accent: #7d2233;
 }
+.case.tone-shop .case-header h1 {
+  font-family: var(--body);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+}
 .gallery-boutique { grid-template-columns: repeat(2, 1fr); align-items: start; }
 .gallery-boutique > div:first-child { grid-column: 1 / -1; }
 
 .case.tone-artist {
   --case-bg: #f8f6f0;
   --case-accent: #35526b;
+}
+.case.tone-artist .case-header h1 {
+  font-family: var(--display);
+  font-style: italic;
 }
 .case.tone-artist .plate-frame { background: #fff; padding: clamp(10px, 1.4vw, 20px); }
 .gallery-atelier { max-width: 960px; margin: 0 auto; justify-items: center; }
@@ -1024,17 +1091,17 @@ form .button { width: 100%; }
   --muted: rgba(239, 232, 216, 0.55);
 }
 .case.tone-street .case-header h1 {
-  font-family: var(--sans);
-  font-weight: 600;
+  font-family: var(--street);
+  font-weight: 760;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.03em;
   font-size: clamp(2.2rem, 5.6vw, 5.4rem);
   color: var(--case-accent);
 }
 .case.tone-street .decision h3 {
   text-transform: uppercase;
-  font-family: var(--sans);
-  font-weight: 600;
+  font-family: var(--street);
+  font-weight: 700;
   font-size: 1rem;
   letter-spacing: 0.06em;
 }
@@ -1158,8 +1225,21 @@ form .button { width: 100%; }
     background: none !important;
   }
   .site-header nav a.active:not(.nav-contact) { color: var(--clay); font-style: italic; }
+  .language-switch {
+    margin-top: 18px;
+    font: 600 12px var(--sans);
+  }
+  .site-header nav .language-switch a {
+    font: 600 12px var(--sans) !important;
+    padding: 7px 10px !important;
+  }
+  .language-switch a,
+  .language-switch span {
+    min-width: 40px;
+    padding: 7px 10px !important;
+  }
   .nav-contact {
-    margin-top: 22px;
+    margin-top: 10px;
     font: 500 15px var(--sans) !important;
   }
 

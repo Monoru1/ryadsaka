@@ -520,4 +520,9 @@ export const projects: Project[] = [
 ]
 
 export const featuredProjects = projects.filter((p) => p.featured)
-export const getProject = (slug: string) => projects.find((p) => p.slug === slug)
+export const getProjects = (locale: Locale = 'fr') =>
+  locale === 'en' ? projects.map(localizeProject) : projects
+export const getProject = (slug: string, locale: Locale = 'fr') =>
+  getProjects(locale).find((p) => p.slug === slug)
+import type { Locale } from '../i18n/LanguageContext'
+import { localizeProject } from '../i18n/projects.en'

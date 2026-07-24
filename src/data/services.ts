@@ -99,3 +99,17 @@ export const delivered = [
   'Les bases du référencement et du partage sur les réseaux',
   'Les accès et les explications pour la suite',
 ]
+
+export const getServiceContent = (locale: Locale = 'fr') => ({
+  tiers: locale === 'en' ? tiersEn : tiers,
+  pricingFactors: locale === 'en' ? pricingFactorsEn : pricingFactors,
+  clientProvides: locale === 'en' ? clientProvidesEn : clientProvides,
+  delivered: locale === 'en' ? deliveredEn : delivered,
+})
+import type { Locale } from '../i18n/LanguageContext'
+import {
+  clientProvidesEn,
+  deliveredEn,
+  pricingFactorsEn,
+  tiersEn,
+} from '../i18n/content.en'

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { site } from '../data/site'
+import { useLanguage } from '../i18n/LanguageContext'
 
 type PageMeta = {
   title: string
@@ -31,11 +32,17 @@ function setCanonical(url: string) {
 }
 
 export function usePageMeta({ title, description, path, image }: PageMeta) {
+  const { locale, href } = useLanguage()
+
   useEffect(() => {
-    const url = `${site.url}${path}`
+    const localizedPath = href(path)
+    const url = `${site.url}${localizedPath}`
     const img = `${site.url}${image ?? site.ogImage}`
+    const frenchUrl = `${site.url}${path}`
+    const englishUrl = `${site.url}${path === '/' ? '/en' : `/en${path}`}`
 
     document.title = title
+    document.documentElement.lang = locale
     setMeta('name', 'description', description)
     setCanonical(url)
 
@@ -44,11 +51,28 @@ export function usePageMeta({ title, description, path, image }: PageMeta) {
     setMeta('property', 'og:url', url)
     setMeta('property', 'og:image', img)
     setMeta('property', 'og:type', 'website')
-    setMeta('property', 'og:locale', 'fr_FR')
+    setMeta('property', 'og:locale', locale === 'en' ? 'en_GB' : 'fr_FR')
 
     setMeta('name', 'twitter:card', 'summary_large_image')
     setMeta('name', 'twitter:title', title)
     setMeta('name', 'twitter:description', description)
     setMeta('name', 'twitter:image', img)
-  }, [title, description, path, image])
+
+    setAlternate('fr', frenchUrl)
+    setAlternate('en', englishUrl)
+    setAlternate('x-default', frenchUrl)
+  }, [title, description, path, image, locale, href])
+}
+
+function setAlternate(language: string, url: string) {
+  let el = document.head.querySelector<HTMLLinkElement>(
+    `link[rel="alternate"][hreflang="${language}"]`,
+  )
+  if (!el) {
+    el = document.createElement('link')
+    el.rel = 'alternate'
+    el.hreflang = language
+    document.head.appendChild(el)
+  }
+  el.href = url
 }

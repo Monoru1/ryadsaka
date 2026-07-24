@@ -1,6 +1,13 @@
 node_modules
 dist
 .DS_Store
+.env
+.env.*
+!.env.example
+.netlify
+.vite
+*.log
+npm-debug.log*
 
 # Artefacts de build TypeScript
 *.tsbuildinfo

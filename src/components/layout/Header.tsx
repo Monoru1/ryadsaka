@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-
-const links = [
-  { to: '/projets', label: 'Projets' },
-  { to: '/services', label: 'Services' },
-  { to: '/methode', label: 'Méthode' },
-  { to: '/a-propos', label: 'À propos' },
-]
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export function Header() {
   const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
+  const { pathname, search, hash } = useLocation()
+  const { href, alternateHref, isEnglish } = useLanguage()
   const navRef = useRef<HTMLElement>(null)
+  const links = [
+    { to: '/projets', label: isEnglish ? 'Work' : 'Projets' },
+    { to: '/services', label: 'Services' },
+    { to: '/methode', label: isEnglish ? 'Process' : 'Méthode' },
+    { to: '/a-propos', label: isEnglish ? 'About' : 'À propos' },
+  ]
+  const currentPath = `${pathname}${search}${hash}`
+  const otherLanguagePath = alternateHref(currentPath)
 
   // Fermer le menu à chaque changement de route.
   useEffect(() => setOpen(false), [pathname])
@@ -35,7 +38,7 @@ export function Header() {
 
   return (
     <header className="site-header">
-      <Link className="brand" to="/" aria-label="Accueil — Ryad Saka">
+      <Link className="brand" to={href('/')} aria-label={isEnglish ? 'Home — Ryad Saka' : 'Accueil — Ryad Saka'}>
         <i aria-hidden="true">R</i>
         <span>
           RYAD
@@ -50,22 +53,39 @@ export function Header() {
         aria-controls="main-nav"
         onClick={() => setOpen((o) => !o)}
       >
-        {open ? 'Fermer' : 'Menu'}
+        {open ? (isEnglish ? 'Close' : 'Fermer') : 'Menu'}
       </button>
 
       <nav
         id="main-nav"
         ref={navRef}
         className={open ? 'open' : ''}
-        aria-label="Navigation principale"
+        aria-label={isEnglish ? 'Main navigation' : 'Navigation principale'}
       >
         {links.map((l) => (
-          <NavLink key={l.to} to={l.to}>
+          <NavLink key={l.to} to={href(l.to)}>
             {l.label}
           </NavLink>
         ))}
-        <NavLink className="nav-contact" to="/contact">
-          Parler du projet
+        <div className="language-switch" aria-label={isEnglish ? 'Language' : 'Langue'}>
+          {isEnglish ? (
+            <>
+              <Link to={otherLanguagePath} lang="fr" hrefLang="fr">
+                FR
+              </Link>
+              <span aria-current="page">EN</span>
+            </>
+          ) : (
+            <>
+              <span aria-current="page">FR</span>
+              <Link to={otherLanguagePath} lang="en" hrefLang="en">
+                EN
+              </Link>
+            </>
+          )}
+        </div>
+        <NavLink className="nav-contact" to={href('/contact')}>
+          {isEnglish ? 'Discuss a project' : 'Parler du projet'}
         </NavLink>
       </nav>
     </header>
