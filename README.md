@@ -2,6 +2,8 @@
 
 Portfolio React/Vite pensé comme un outil de conversion : il explique ce que le travail peut changer pour une activité, montre des univers de projets distincts et simplifie la prise de contact.
 
+Le site existe en français et en anglais (`/en`). Les polices sont auto-hébergées, les routes sont compatibles avec Netlify et les principaux en-têtes de sécurité sont définis dans `netlify.toml`.
+
 ## Lancer en local
 
 ```bash

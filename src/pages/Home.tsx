@@ -2,14 +2,20 @@ import { Link } from 'react-router-dom'
 import { Layout } from '../components/layout/Layout'
 import { Window } from '../components/ui/Window'
 import { getProject, Project } from '../data/projects'
-import { problems } from '../data/problems'
-import { tiers } from '../data/services'
-import { proofPoints, site } from '../data/site'
+import { getProblems } from '../data/problems'
+import { getServiceContent } from '../data/services'
+import { getSiteContent } from '../data/site'
 import { usePageMeta } from '../hooks/usePageMeta'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export function Home() {
+  const { locale, href, isEnglish } = useLanguage()
+  const { site } = getSiteContent(locale)
+
   usePageMeta({
-    title: 'Ryad Saka — Sites sur mesure pour hôtels, restaurants, marques et indépendants',
+    title: isEnglish
+      ? 'Ryad Saka — Bespoke websites for places, brands and independent businesses'
+      : 'Ryad Saka — Sites sur mesure pour hôtels, restaurants, marques et indépendants',
     description: site.description,
     path: '/',
   })
@@ -24,14 +30,19 @@ export function Home() {
       <Reassurance />
 
       <section className="closing">
-        <p className="eyebrow">La suite vous appartient</p>
-        <h2>Votre activité n’a pas besoin d’un site de plus. Elle a besoin du bon.</h2>
+        <p className="eyebrow">{isEnglish ? 'What comes next is yours' : 'La suite vous appartient'}</p>
+        <h2>
+          {isEnglish
+            ? 'Your business does not need another website. It needs the right one.'
+            : 'Votre activité n’a pas besoin d’un site de plus. Elle a besoin du bon.'}
+        </h2>
         <p>
-          Si votre travail mérite d’être mieux compris, mieux désiré ou plus simple à contacter,
-          commençons par regarder ce qui bloque aujourd’hui.
+          {isEnglish
+            ? 'If your work deserves to be understood more clearly, desired more strongly or easier to contact, let us begin with what is getting in the way today.'
+            : 'Si votre travail mérite d’être mieux compris, mieux désiré ou plus simple à contacter, commençons par regarder ce qui bloque aujourd’hui.'}
         </p>
-        <Link className="button light" to="/contact">
-          Décrire mon besoin
+        <Link className="button light" to={href('/contact')}>
+          {isEnglish ? 'Describe what I need' : 'Décrire mon besoin'}
         </Link>
       </section>
     </Layout>
@@ -41,20 +52,26 @@ export function Home() {
 /* ------------------------------------------------------------------ */
 
 function Hero() {
+  const { locale, href, isEnglish } = useLanguage()
+  const { site } = getSiteContent(locale)
   const heroScreens = [
     {
       src: '/projects/saint-jules/desktop.webp',
-      alt: 'Site de l’hôtel particulier Maison Saint-Jules, conçu et développé par Ryad Saka',
+      alt: isEnglish
+        ? 'Maison Saint-Jules private hotel website, designed and developed by Ryad Saka'
+        : 'Site de l’hôtel particulier Maison Saint-Jules, conçu et développé par Ryad Saka',
       ref: 'SAINT-JULES',
     },
     {
       src: '/projects/heritage/mobile.webp',
-      alt: 'Version mobile du site du restaurant Héritage',
+      alt: isEnglish
+        ? 'Mobile version of the Héritage restaurant website'
+        : 'Version mobile du site du restaurant Héritage',
       ref: 'HÉRITAGE · MOBILE',
     },
     {
       src: '/projects/zion/desktop.webp',
-      alt: 'Site de la marque streetwear ZION',
+      alt: isEnglish ? 'Website for the ZION streetwear brand' : 'Site de la marque streetwear ZION',
       ref: 'ZION',
     },
   ]
@@ -65,29 +82,35 @@ function Hero() {
         {site.role} · {site.location}
       </p>
       <h1>
-        Un travail sérieux, mal montré, <em>reste invisible.</em>
+        {isEnglish ? 'Serious work, poorly presented, ' : 'Un travail sérieux, mal montré, '}
+        <em>{isEnglish ? 'remains invisible.' : 'reste invisible.'}</em>
       </h1>
       <div className="hero-bottom">
         <div className="hero-pitch">
           <p>
-            Je conçois et développe des sites de bout en bout — le positionnement, le dessin, le
-            code, la mise en ligne. Vous parlez à une seule personne, et cette personne fait le
-            travail.
+            {isEnglish
+              ? 'I design and develop websites from beginning to end — positioning, visual direction, code and launch. You speak to one person, and that person does the work.'
+              : 'Je conçois et développe des sites de bout en bout — le positionnement, le dessin, le code, la mise en ligne. Vous parlez à une seule personne, et cette personne fait le travail.'}
           </p>
           <div className="hero-actions">
-            <Link className="button fill" to="/contact">
-              Parler de mon projet
+            <Link className="button fill" to={href('/contact')}>
+              {isEnglish ? 'Discuss my project' : 'Parler de mon projet'}
             </Link>
-            <Link className="text-link" to="/projets">
-              Voir les projets
+            <Link className="text-link" to={href('/projets')}>
+              {isEnglish ? 'See the work' : 'Voir les projets'}
             </Link>
           </div>
           <p className="hero-proof-line">
-            Six projets en ligne. Chaque page montrée ici peut être ouverte et vérifiée.
+            {isEnglish
+              ? 'Six live projects. Every page shown here can be opened and inspected.'
+              : 'Six projets en ligne. Chaque page montrée ici peut être ouverte et vérifiée.'}
           </p>
         </div>
 
-        <div className="hero-proof" aria-label="Aperçus de projets réalisés">
+        <div
+          className="hero-proof"
+          aria-label={isEnglish ? 'Previews of completed projects' : 'Aperçus de projets réalisés'}
+        >
           {heroScreens.map((s, i) => (
             <figure key={s.ref} className={`hero-shot shot-${i + 1}`}>
               <img src={s.src} alt={s.alt} loading="eager" decoding="async" />
@@ -113,14 +136,16 @@ function FolioMeta({ index, project }: { index: string; project: Project }) {
 }
 
 function FolioLinks({ project }: { project: Project }) {
+  const { href, isEnglish } = useLanguage()
+
   return (
     <div className="folio-links">
-      <Link className="text-link" to={`/projets/${project.slug}`}>
-        Lire l’étude de cas
+      <Link className="text-link" to={href(`/projets/${project.slug}`)}>
+        {isEnglish ? 'Read the case study' : 'Lire l’étude de cas'}
       </Link>
       {project.url && (
         <a className="text-link quiet" href={project.url} target="_blank" rel="noreferrer">
-          Ouvrir {project.title}
+          {isEnglish ? `Open ${project.title}` : `Ouvrir ${project.title}`}
         </a>
       )}
     </div>
@@ -128,24 +153,28 @@ function FolioLinks({ project }: { project: Project }) {
 }
 
 function Folio() {
-  const sj = getProject('saint-jules')
-  const vortex = getProject('vortex')
-  const heritage = getProject('heritage')
-  const pyjamas = getProject('pyjamas')
-  const emma = getProject('emma')
-  const zion = getProject('zion')
+  const { locale, href, isEnglish } = useLanguage()
+  const sj = getProject('saint-jules', locale)
+  const vortex = getProject('vortex', locale)
+  const heritage = getProject('heritage', locale)
+  const pyjamas = getProject('pyjamas', locale)
+  const emma = getProject('emma', locale)
+  const zion = getProject('zion', locale)
   if (!sj || !vortex || !heritage || !pyjamas || !emma || !zion) return null
 
   return (
-    <section aria-label="Projets sélectionnés">
+    <section aria-label={isEnglish ? 'Selected projects' : 'Projets sélectionnés'}>
       <div className="folio-head section-head">
-        <p className="eyebrow">Six projets, six climats</p>
+        <p className="eyebrow">{isEnglish ? 'Six projects, six climates' : 'Six projets, six climats'}</p>
         <h2>
-          Un hôtel ne se montre pas comme un musée. Un restaurant ne parle pas comme une marque.
+          {isEnglish
+            ? 'A hotel is not presented like a museum. A restaurant does not speak like a brand.'
+            : 'Un hôtel ne se montre pas comme un musée. Un restaurant ne parle pas comme une marque.'}
         </h2>
         <p className="section-note">
-          Chaque projet ci-dessous impose son propre climat — et chaque page présentée est la
-          vraie, telle qu’elle est en ligne aujourd’hui.
+          {isEnglish
+            ? 'Each project below sets its own climate, and every page shown is the real one currently online.'
+            : 'Chaque projet ci-dessous impose son propre climat — et chaque page présentée est la vraie, telle qu’elle est en ligne aujourd’hui.'}
         </p>
       </div>
 
@@ -158,21 +187,29 @@ function Folio() {
               <div className="plate-frame">
                 <img
                   src="/projects/saint-jules/desktop.webp"
-                  alt="Page d’accueil de Maison Saint-Jules : la façade de l’hôtel particulier à la tombée du jour"
+                  alt={
+                    isEnglish
+                      ? 'Maison Saint-Jules homepage showing the private hotel at dusk'
+                      : 'Page d’accueil de Maison Saint-Jules : la façade de l’hôtel particulier à la tombée du jour'
+                  }
                   loading="lazy"
                   decoding="async"
                 />
               </div>
               <figcaption>
-                <span className="plate-ref">Pièce 01 · l’arrivée</span>
-                <span className="plate-note">le lieu d’abord, le discours ensuite</span>
+                <span className="plate-ref">
+                  {isEnglish ? 'Room 01 · arrival' : 'Pièce 01 · l’arrivée'}
+                </span>
+                <span className="plate-note">
+                  {isEnglish ? 'the place first, the explanation second' : 'le lieu d’abord, le discours ensuite'}
+                </span>
               </figcaption>
             </figure>
             <figure className="plate plate-mobile">
               <div className="plate-frame">
                 <img
                   src="/projects/saint-jules/mobile.webp"
-                  alt="Version mobile de Maison Saint-Jules"
+                  alt={isEnglish ? 'Mobile version of Maison Saint-Jules' : 'Version mobile de Maison Saint-Jules'}
                   loading="lazy"
                   decoding="async"
                 />
@@ -198,8 +235,12 @@ function Folio() {
           </div>
           <Window
             src="/projects/vortex/full-collections.webp"
-            alt="Page collections complète du site Vortex : les quatre salles du musée"
-            tag="Page collections — faites défiler"
+            alt={
+              isEnglish
+                ? 'Complete Vortex collections page showing the museum’s four rooms'
+                : 'Page collections complète du site Vortex : les quatre salles du musée'
+            }
+            tag={isEnglish ? 'Collections page — scroll' : 'Page collections — faites défiler'}
           />
         </div>
       </article>
@@ -215,8 +256,12 @@ function Folio() {
           </div>
           <Window
             src="/projects/heritage/full-accueil.webp"
-            alt="Page d’accueil complète du restaurant Héritage, du haut jusqu’au pied de page"
-            tag="Accueil complet — faites défiler"
+            alt={
+              isEnglish
+                ? 'Complete Héritage restaurant homepage from header to footer'
+                : 'Page d’accueil complète du restaurant Héritage, du haut jusqu’au pied de page'
+            }
+            tag={isEnglish ? 'Complete homepage — scroll' : 'Accueil complet — faites défiler'}
           />
         </div>
       </article>
@@ -232,13 +277,13 @@ function Folio() {
           </div>
           <Window
             src="/projects/pyjamas/full-accueil.webp"
-            alt="Page d’accueil complète de La Maison des Pyjamas"
-            tag="La vitrine — faites défiler"
+            alt={isEnglish ? 'Complete La Maison des Pyjamas homepage' : 'Page d’accueil complète de La Maison des Pyjamas'}
+            tag={isEnglish ? 'Shop window — scroll' : 'La vitrine — faites défiler'}
           />
           <Window
             src="/projects/pyjamas/full-catalogue.webp"
-            alt="Page catalogue complète de La Maison des Pyjamas"
-            tag="Le catalogue — faites défiler"
+            alt={isEnglish ? 'Complete La Maison des Pyjamas catalogue page' : 'Page catalogue complète de La Maison des Pyjamas'}
+            tag={isEnglish ? 'Catalogue — scroll' : 'Le catalogue — faites défiler'}
           />
         </div>
       </article>
@@ -256,14 +301,20 @@ function Folio() {
             <div className="plate-frame">
               <img
                 src="/projects/emma/desktop.webp"
-                alt="Page d’accueil du portfolio emma.illustre : « un trait sincère »"
+                alt={
+                  isEnglish
+                    ? 'emma.illustre portfolio homepage with the words “un trait sincère”'
+                    : 'Page d’accueil du portfolio emma.illustre : « un trait sincère »'
+                }
                 loading="lazy"
                 decoding="async"
               />
             </div>
             <figcaption>
-              <span className="plate-ref">Tirage 01</span>
-              <span className="plate-note">l’interface s’efface derrière le trait</span>
+              <span className="plate-ref">{isEnglish ? 'Print 01' : 'Tirage 01'}</span>
+              <span className="plate-note">
+                {isEnglish ? 'the interface steps back behind the line' : 'l’interface s’efface derrière le trait'}
+              </span>
             </figcaption>
           </figure>
         </div>
@@ -280,15 +331,15 @@ function Folio() {
           </div>
           <Window
             src="/projects/zion/full-accueil.webp"
-            alt="Page manifeste complète du site ZION, or sur noir"
-            tag="Le manifeste — faites défiler"
+            alt={isEnglish ? 'Complete ZION manifesto page in gold on black' : 'Page manifeste complète du site ZION, or sur noir'}
+            tag={isEnglish ? 'Manifesto — scroll' : 'Le manifeste — faites défiler'}
           />
         </div>
       </article>
 
       <div className="folio-foot">
-        <Link className="text-link" to="/projets">
-          Voir les six projets en détail
+        <Link className="text-link" to={href('/projets')}>
+          {isEnglish ? 'Explore all six projects' : 'Voir les six projets en détail'}
         </Link>
       </div>
     </section>
@@ -298,14 +349,22 @@ function Folio() {
 /* ------------------------------------------------------------------ */
 
 function Recognition() {
+  const { locale, isEnglish } = useLanguage()
+  const problems = getProblems(locale)
+
   return (
     <section className="recognition">
       <div className="recognition-intro">
-        <p className="eyebrow">Vous vous reconnaîtrez peut-être</p>
-        <h2>Un bon projet commence rarement par « il me faut un site ».</h2>
+        <p className="eyebrow">{isEnglish ? 'This may sound familiar' : 'Vous vous reconnaîtrez peut-être'}</p>
+        <h2>
+          {isEnglish
+            ? 'A good project rarely begins with “I need a website”.'
+            : 'Un bon projet commence rarement par « il me faut un site ».'}
+        </h2>
         <p className="lead">
-          Six situations que je rencontre vraiment. Si l’une vous ressemble, parlons de votre
-          activité avant de parler de pages ou de technologie.
+          {isEnglish
+            ? 'Six situations I actually encounter. If one sounds like yours, let us discuss the business before pages or technology.'
+            : 'Six situations que je rencontre vraiment. Si l’une vous ressemble, parlons de votre activité avant de parler de pages ou de technologie.'}
         </p>
       </div>
 
@@ -325,11 +384,18 @@ function Recognition() {
 }
 
 function ServicesSummary() {
+  const { locale, href, isEnglish } = useLanguage()
+  const { tiers } = getServiceContent(locale)
+
   return (
     <section className="services-summary">
       <div className="section-head">
-        <p className="eyebrow">Trois façons de travailler ensemble</p>
-        <h2>Des formats clairs, un périmètre écrit avant de commencer.</h2>
+        <p className="eyebrow">{isEnglish ? 'Three ways to work together' : 'Trois façons de travailler ensemble'}</p>
+        <h2>
+          {isEnglish
+            ? 'Clear formats and a written scope before work begins.'
+            : 'Des formats clairs, un périmètre écrit avant de commencer.'}
+        </h2>
       </div>
       <div className="tiers-row">
         {tiers.map((t) => (
@@ -337,8 +403,8 @@ function ServicesSummary() {
             <h3>{t.name}</h3>
             <p className="tier-price">{t.price}</p>
             <p>{t.promise}</p>
-            <Link className="text-link" to="/services">
-              Voir le détail
+            <Link className="text-link" to={href('/services')}>
+              {isEnglish ? 'See the details' : 'Voir le détail'}
             </Link>
           </article>
         ))}
@@ -348,30 +414,43 @@ function ServicesSummary() {
 }
 
 function Diagnostic() {
+  const { href, isEnglish } = useLanguage()
+
   return (
     <section className="diagnostic">
       <div>
-        <p className="eyebrow">Vous hésitez encore ? Commencez ici.</p>
-        <h2>Montrez-moi votre activité — ou votre site actuel.</h2>
+        <p className="eyebrow">{isEnglish ? 'Still unsure? Begin here.' : 'Vous hésitez encore ? Commencez ici.'}</p>
+        <h2>
+          {isEnglish
+            ? 'Show me your business — or your current website.'
+            : 'Montrez-moi votre activité — ou votre site actuel.'}
+        </h2>
         <p className="lead">
-          Envoyez un lien : votre site, votre Instagram, votre carte en photo. Je réponds avec
-          une première lecture honnête et quelques questions utiles. Une conversation courte,
-          pas un rapport automatique — et aucun engagement.
+          {isEnglish
+            ? 'Send a link to your website, Instagram or even a photograph of your menu. I will reply with an honest first reading and a few useful questions. A short conversation, not an automated report, with no commitment.'
+            : 'Envoyez un lien : votre site, votre Instagram, votre carte en photo. Je réponds avec une première lecture honnête et quelques questions utiles. Une conversation courte, pas un rapport automatique — et aucun engagement.'}
         </p>
       </div>
-      <Link className="button fill" to="/contact?entree=diagnostic">
-        Envoyer un lien à regarder
+      <Link className="button fill" to={href('/contact?entree=diagnostic')}>
+        {isEnglish ? 'Send me a link' : 'Envoyer un lien à regarder'}
       </Link>
     </section>
   )
 }
 
 function Reassurance() {
+  const { locale, isEnglish } = useLanguage()
+  const { proofPoints } = getSiteContent(locale)
+
   return (
     <section className="reassurance">
       <div className="section-head">
-        <p className="eyebrow">Ce sur quoi vous pouvez compter</p>
-        <h2>Des faits vérifiables, pas des promesses décoratives.</h2>
+        <p className="eyebrow">{isEnglish ? 'What you can count on' : 'Ce sur quoi vous pouvez compter'}</p>
+        <h2>
+          {isEnglish
+            ? 'Verifiable facts, not decorative promises.'
+            : 'Des faits vérifiables, pas des promesses décoratives.'}
+        </h2>
       </div>
       <ul className="facts">
         {proofPoints.map((f) => (

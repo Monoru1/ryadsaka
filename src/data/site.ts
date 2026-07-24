@@ -17,3 +17,10 @@ export const proofPoints = [
   'Vous parlez directement à la personne qui conçoit et développe',
   'Basé en France, disponible partout à distance',
 ]
+
+export const getSiteContent = (locale: Locale = 'fr') => ({
+  site: locale === 'en' ? { ...site, ...siteEn } : site,
+  proofPoints: locale === 'en' ? proofPointsEn : proofPoints,
+})
+import type { Locale } from '../i18n/LanguageContext'
+import { proofPointsEn, siteEn } from '../i18n/content.en'

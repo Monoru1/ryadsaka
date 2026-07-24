@@ -62,3 +62,7 @@ export const problems: Problem[] = [
     tierId: 'sur-mesure',
   },
 ]
+
+export const getProblems = (locale: Locale = 'fr') => (locale === 'en' ? problemsEn : problems)
+import type { Locale } from '../i18n/LanguageContext'
+import { problemsEn } from '../i18n/content.en'
