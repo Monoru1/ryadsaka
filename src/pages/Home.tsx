@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Layout } from '../components/layout/Layout'
-import { Window } from '../components/ui/Window'
-import { getProject, Project } from '../data/projects'
-import { getProblems } from '../data/problems'
+import { getProject } from '../data/projects'
 import { getServiceContent } from '../data/services'
 import { getSiteContent } from '../data/site'
 import { usePageMeta } from '../hooks/usePageMeta'
@@ -23,11 +21,9 @@ export function Home() {
   return (
     <Layout>
       <Hero />
-      <Folio />
-      <Recognition />
+      <Works />
       <ServicesSummary />
       <Diagnostic />
-      <Reassurance />
 
       <section className="closing">
         <p className="eyebrow">{isEnglish ? 'What comes next is yours' : 'La suite vous appartient'}</p>
@@ -94,7 +90,7 @@ function Hero() {
           </p>
           <div className="hero-actions">
             <Link className="button fill" to={href('/contact')}>
-              {isEnglish ? 'Discuss my project' : 'Parler de mon projet'}
+              {isEnglish ? 'Discuss my project' : 'Discuter du projet'}
             </Link>
             <Link className="text-link" to={href('/projets')}>
               {isEnglish ? 'See the work' : 'Voir les projets'}
@@ -125,221 +121,63 @@ function Hero() {
 
 /* ------------------------------------------------------------------ */
 
-function FolioMeta({ index, project }: { index: string; project: Project }) {
-  return (
-    <p className="folio-meta">
-      <b>{index}</b>
-      <span>{project.nature}</span>
-      <span>{project.sector}</span>
-    </p>
-  )
+const workTones: Record<string, string> = {
+  'saint-jules': 'wc-hotel',
+  vortex: 'wc-museum',
+  heritage: 'wc-restaurant',
+  pyjamas: 'wc-shop',
+  emma: 'wc-artist',
+  zion: 'wc-street',
 }
 
-function FolioLinks({ project }: { project: Project }) {
-  const { href, isEnglish } = useLanguage()
-
-  return (
-    <div className="folio-links">
-      <Link className="text-link" to={href(`/projets/${project.slug}`)}>
-        {isEnglish ? 'Read the case study' : 'Lire l’étude de cas'}
-      </Link>
-      {project.url && (
-        <a className="text-link quiet" href={project.url} target="_blank" rel="noreferrer">
-          {isEnglish ? `Open ${project.title}` : `Ouvrir ${project.title}`}
-        </a>
-      )}
-    </div>
-  )
-}
-
-function Folio() {
+function Works() {
   const { locale, href, isEnglish } = useLanguage()
-  const sj = getProject('saint-jules', locale)
-  const vortex = getProject('vortex', locale)
-  const heritage = getProject('heritage', locale)
-  const pyjamas = getProject('pyjamas', locale)
-  const emma = getProject('emma', locale)
-  const zion = getProject('zion', locale)
-  if (!sj || !vortex || !heritage || !pyjamas || !emma || !zion) return null
+  const slugs = ['saint-jules', 'vortex', 'heritage', 'pyjamas', 'emma', 'zion']
+  const items = slugs
+    .map((slug) => getProject(slug, locale))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
 
   return (
-    <section aria-label={isEnglish ? 'Selected projects' : 'Projets sélectionnés'}>
-      <div className="folio-head section-head">
-        <p className="eyebrow">{isEnglish ? 'Six projects, six climates' : 'Six projets, six climats'}</p>
+    <section className="works" aria-label={isEnglish ? 'Selected projects' : 'Projets sélectionnés'}>
+      <div className="section-head">
+        <p className="eyebrow">{isEnglish ? 'Six live projects' : 'Six projets en ligne'}</p>
         <h2>
           {isEnglish
-            ? 'A hotel is not presented like a museum. A restaurant does not speak like a brand.'
-            : 'Un hôtel ne se montre pas comme un musée. Un restaurant ne parle pas comme une marque.'}
+            ? 'Each project has its own world. Open one.'
+            : 'Chaque projet a son monde. Ouvrez-en un.'}
         </h2>
-        <p className="section-note">
+        <p className="section-copy">
           {isEnglish
-            ? 'Each project below sets its own climate, and every page shown is the real one currently online.'
-            : 'Chaque projet ci-dessous impose son propre climat — et chaque page présentée est la vraie, telle qu’elle est en ligne aujourd’hui.'}
+            ? 'You do not need to know which kind of website to request. Begin with the project closest to your situation.'
+            : 'Vous n’avez pas besoin de savoir quel type de site demander. Commencez par le projet le plus proche de votre situation.'}
         </p>
       </div>
 
-      {/* 01 — Saint-Jules */}
-      <article className="folio-entry f-hotel">
-        <FolioMeta index="01" project={sj} />
-        <div className="folio-body">
-          <div className="duo">
-            <figure className="plate">
-              <div className="plate-frame">
-                <img
-                  src="/projects/saint-jules/desktop.webp"
-                  alt={
-                    isEnglish
-                      ? 'Maison Saint-Jules homepage showing the private hotel at dusk'
-                      : 'Page d’accueil de Maison Saint-Jules : la façade de l’hôtel particulier à la tombée du jour'
-                  }
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <figcaption>
-                <span className="plate-ref">
-                  {isEnglish ? 'Room 01 · arrival' : 'Pièce 01 · l’arrivée'}
-                </span>
-                <span className="plate-note">
-                  {isEnglish ? 'the place first, the explanation second' : 'le lieu d’abord, le discours ensuite'}
-                </span>
-              </figcaption>
-            </figure>
-            <figure className="plate plate-mobile">
-              <div className="plate-frame">
-                <img
-                  src="/projects/saint-jules/mobile.webp"
-                  alt={isEnglish ? 'Mobile version of Maison Saint-Jules' : 'Version mobile de Maison Saint-Jules'}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </figure>
-          </div>
-          <div>
-            <h3>{sj.title}</h3>
-            <p className="folio-text">{sj.summary}</p>
-            <FolioLinks project={sj} />
-          </div>
-        </div>
-      </article>
-
-      {/* 02 — Vortex */}
-      <article className="folio-entry f-museum">
-        <FolioMeta index="02" project={vortex} />
-        <div className="folio-body">
-          <div>
-            <h3>{vortex.title}</h3>
-            <p className="folio-text">{vortex.summary}</p>
-            <FolioLinks project={vortex} />
-          </div>
-          <Window
-            src="/projects/vortex/full-collections.webp"
-            alt={
-              isEnglish
-                ? 'Complete Vortex collections page showing the museum’s four rooms'
-                : 'Page collections complète du site Vortex : les quatre salles du musée'
-            }
-            tag={isEnglish ? 'Collections page — scroll' : 'Page collections — faites défiler'}
-          />
-        </div>
-      </article>
-
-      {/* 03 — Héritage */}
-      <article className="folio-entry f-restaurant">
-        <FolioMeta index="03" project={heritage} />
-        <div className="folio-body">
-          <div>
-            <h3>{heritage.title}</h3>
-            <p className="folio-text">{heritage.summary}</p>
-            <FolioLinks project={heritage} />
-          </div>
-          <Window
-            src="/projects/heritage/full-accueil.webp"
-            alt={
-              isEnglish
-                ? 'Complete Héritage restaurant homepage from header to footer'
-                : 'Page d’accueil complète du restaurant Héritage, du haut jusqu’au pied de page'
-            }
-            tag={isEnglish ? 'Complete homepage — scroll' : 'Accueil complet — faites défiler'}
-          />
-        </div>
-      </article>
-
-      {/* 04 — Pyjamas */}
-      <article className="folio-entry f-shop">
-        <FolioMeta index="04" project={pyjamas} />
-        <div className="folio-body">
-          <div className="folio-intro">
-            <h3>{pyjamas.title}</h3>
-            <p className="folio-text">{pyjamas.summary}</p>
-            <FolioLinks project={pyjamas} />
-          </div>
-          <Window
-            src="/projects/pyjamas/full-accueil.webp"
-            alt={isEnglish ? 'Complete La Maison des Pyjamas homepage' : 'Page d’accueil complète de La Maison des Pyjamas'}
-            tag={isEnglish ? 'Shop window — scroll' : 'La vitrine — faites défiler'}
-          />
-          <Window
-            src="/projects/pyjamas/full-catalogue.webp"
-            alt={isEnglish ? 'Complete La Maison des Pyjamas catalogue page' : 'Page catalogue complète de La Maison des Pyjamas'}
-            tag={isEnglish ? 'Catalogue — scroll' : 'Le catalogue — faites défiler'}
-          />
-        </div>
-      </article>
-
-      {/* 05 — Emma */}
-      <article className="folio-entry f-artist">
-        <FolioMeta index="05" project={emma} />
-        <div className="folio-body">
-          <div>
-            <h3>{emma.title}</h3>
-            <p className="folio-text">{emma.summary}</p>
-            <FolioLinks project={emma} />
-          </div>
-          <figure className="plate">
-            <div className="plate-frame">
-              <img
-                src="/projects/emma/desktop.webp"
-                alt={
-                  isEnglish
-                    ? 'emma.illustre portfolio homepage with the words “un trait sincère”'
-                    : 'Page d’accueil du portfolio emma.illustre : « un trait sincère »'
-                }
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <figcaption>
-              <span className="plate-ref">{isEnglish ? 'Print 01' : 'Tirage 01'}</span>
-              <span className="plate-note">
-                {isEnglish ? 'the interface steps back behind the line' : 'l’interface s’efface derrière le trait'}
+      <div className="works-grid">
+        {items.map((p) => {
+          const cover = p.screens.find((s) => s.kind === 'desktop') ?? p.screens[0]
+          return (
+            <Link
+              key={p.slug}
+              className={`work-card ${workTones[p.slug] ?? ''}`}
+              to={href(`/projets/${p.slug}`)}
+              aria-label={
+                isEnglish ? `Open the ${p.title} case study` : `Ouvrir l’étude de cas ${p.title}`
+              }
+            >
+              <span className="work-card-visual">
+                {cover && <img src={cover.src} alt={cover.alt} loading="eager" decoding="async" />}
               </span>
-            </figcaption>
-          </figure>
-        </div>
-      </article>
+              <span className="work-card-meta">{p.sector}</span>
+              <h3>{p.title}</h3>
+            </Link>
+          )
+        })}
+      </div>
 
-      {/* 06 — ZION */}
-      <article className="folio-entry f-street">
-        <FolioMeta index="06" project={zion} />
-        <div className="folio-body">
-          <div>
-            <h3>{zion.title}</h3>
-            <p className="folio-text">{zion.summary}</p>
-            <FolioLinks project={zion} />
-          </div>
-          <Window
-            src="/projects/zion/full-accueil.webp"
-            alt={isEnglish ? 'Complete ZION manifesto page in gold on black' : 'Page manifeste complète du site ZION, or sur noir'}
-            tag={isEnglish ? 'Manifesto — scroll' : 'Le manifeste — faites défiler'}
-          />
-        </div>
-      </article>
-
-      <div className="folio-foot">
+      <div className="works-foot">
         <Link className="text-link" to={href('/projets')}>
-          {isEnglish ? 'Explore all six projects' : 'Voir les six projets en détail'}
+          {isEnglish ? 'See the six projects in detail' : 'Voir les six projets en détail'}
         </Link>
       </div>
     </section>
@@ -348,41 +186,6 @@ function Folio() {
 
 /* ------------------------------------------------------------------ */
 
-function Recognition() {
-  const { locale, isEnglish } = useLanguage()
-  const problems = getProblems(locale)
-
-  return (
-    <section className="recognition">
-      <div className="recognition-intro">
-        <p className="eyebrow">{isEnglish ? 'This may sound familiar' : 'Vous vous reconnaîtrez peut-être'}</p>
-        <h2>
-          {isEnglish
-            ? 'A good project rarely begins with “I need a website”.'
-            : 'Un bon projet commence rarement par « il me faut un site ».'}
-        </h2>
-        <p className="lead">
-          {isEnglish
-            ? 'Six situations I actually encounter. If one sounds like yours, let us discuss the business before pages or technology.'
-            : 'Six situations que je rencontre vraiment. Si l’une vous ressemble, parlons de votre activité avant de parler de pages ou de technologie.'}
-        </p>
-      </div>
-
-      <div className="recognition-notes">
-        {problems.map((problem, index) => (
-          <article key={problem.id}>
-            <p className="plate-ref">
-              0{index + 1} · {problem.label}
-            </p>
-            <p>{problem.situation}</p>
-            <p className="recognition-response">{problem.response}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function ServicesSummary() {
   const { locale, href, isEnglish } = useLanguage()
   const { tiers } = getServiceContent(locale)
@@ -390,10 +193,12 @@ function ServicesSummary() {
   return (
     <section className="services-summary">
       <div className="section-head">
-        <p className="eyebrow">{isEnglish ? 'Three ways to work together' : 'Trois façons de travailler ensemble'}</p>
+        <p className="eyebrow">
+          {isEnglish ? 'Three ways to work together' : 'Trois façons de travailler ensemble'}
+        </p>
         <h2>
           {isEnglish
-            ? 'Clear formats and a written scope before work begins.'
+            ? 'Clear formats, with the scope written down before we start.'
             : 'Des formats clairs, un périmètre écrit avant de commencer.'}
         </h2>
       </div>
@@ -419,7 +224,9 @@ function Diagnostic() {
   return (
     <section className="diagnostic">
       <div>
-        <p className="eyebrow">{isEnglish ? 'Still unsure? Begin here.' : 'Vous hésitez encore ? Commencez ici.'}</p>
+        <p className="eyebrow">
+          {isEnglish ? 'Still hesitating? Start here.' : 'Vous hésitez encore ? Commencez ici.'}
+        </p>
         <h2>
           {isEnglish
             ? 'Show me your business — or your current website.'
@@ -427,36 +234,13 @@ function Diagnostic() {
         </h2>
         <p className="lead">
           {isEnglish
-            ? 'Send a link to your website, Instagram or even a photograph of your menu. I will reply with an honest first reading and a few useful questions. A short conversation, not an automated report, with no commitment.'
+            ? 'Send a link: your website, your Instagram, a photo of your business card. I reply with an honest first reading and a few useful questions. A short conversation, not an automated report — and no commitment.'
             : 'Envoyez un lien : votre site, votre Instagram, votre carte en photo. Je réponds avec une première lecture honnête et quelques questions utiles. Une conversation courte, pas un rapport automatique — et aucun engagement.'}
         </p>
       </div>
       <Link className="button fill" to={href('/contact?entree=diagnostic')}>
-        {isEnglish ? 'Send me a link' : 'Envoyer un lien à regarder'}
+        {isEnglish ? 'Send a link to look at' : 'Envoyer un lien à regarder'}
       </Link>
-    </section>
-  )
-}
-
-function Reassurance() {
-  const { locale, isEnglish } = useLanguage()
-  const { proofPoints } = getSiteContent(locale)
-
-  return (
-    <section className="reassurance">
-      <div className="section-head">
-        <p className="eyebrow">{isEnglish ? 'What you can count on' : 'Ce sur quoi vous pouvez compter'}</p>
-        <h2>
-          {isEnglish
-            ? 'Verifiable facts, not decorative promises.'
-            : 'Des faits vérifiables, pas des promesses décoratives.'}
-        </h2>
-      </div>
-      <ul className="facts">
-        {proofPoints.map((f) => (
-          <li key={f}>{f}</li>
-        ))}
-      </ul>
     </section>
   )
 }

@@ -54,19 +54,19 @@ export function About() {
         <figure className="identity">
           <img
             className="identity-photo"
-            src="/og-image.png"
+            src="/about-code.webp"
             alt={
               isEnglish
-                ? 'A selection of websites designed and developed by Ryad Saka'
-                : 'Une sélection de sites conçus et développés par Ryad Saka'
+                ? 'Real source code of this website: the Window component, open in a code editor'
+                : 'Le vrai code source de ce site : le composant Window, ouvert dans un éditeur'
             }
           />
           <figcaption className="identity-notes">
-            <span className="plate-ref">{isEnglish ? 'CURRENT WORK · 2026' : 'TRAVAIL EN COURS · 2026'}</span>
+            <span className="plate-ref">{isEnglish ? 'BEHIND THIS WEBSITE · 2026' : 'DANS LES COULISSES DU SITE · 2026'}</span>
             <em>
               {isEnglish
-                ? 'Several weeks of real work, held in one image.'
-                : 'Plusieurs semaines de travail réel, réunies en une image.'}
+                ? 'This website was designed and developed expressly. Here is part of its actual code.'
+                : 'Ce site a été conçu et développé sur mesure. En voici une partie du code réel.'}
             </em>
             <span className="identity-meta">{site.location}</span>
           </figcaption>
