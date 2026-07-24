@@ -52,7 +52,7 @@ function Hero() {
   const { site } = getSiteContent(locale)
   const heroScreens = [
     {
-      src: '/projects/saint-jules/desktop.webp',
+      src: '/projects/saint-jules/cover.webp',
       alt: isEnglish
         ? 'Maison Saint-Jules private hotel website, designed and developed by Ryad Saka'
         : 'Site de l’hôtel particulier Maison Saint-Jules, conçu et développé par Ryad Saka',

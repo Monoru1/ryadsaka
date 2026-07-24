@@ -85,7 +85,7 @@ export const projects: Project[] = [
     ],
     screens: [
       {
-        src: '/projects/saint-jules/desktop.webp',
+        src: '/projects/saint-jules/cover.webp',
         alt: 'Page d’accueil de Maison Saint-Jules : façade de l’hôtel particulier à la tombée du jour, titre « Une demeure à traverser »',
         kind: 'desktop',
         caption: 'Écran d’arrivée — la façade avant les arguments',
