@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/LanguageContext'
 type WindowProps = {
   src: string
   alt: string
@@ -23,4 +24,3 @@ export function Window({ src, alt, tag, eager = false }: WindowProps) {
     </div>
   )
 }
-import { useLanguage } from '../../i18n/LanguageContext'

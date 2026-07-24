@@ -85,7 +85,7 @@ export function Header() {
           )}
         </div>
         <NavLink className="nav-contact" to={href('/contact')}>
-          {isEnglish ? 'Discuss a project' : 'Parler du projet'}
+          {isEnglish ? 'Discuss the project' : 'Discuter du projet'}
         </NavLink>
       </nav>
     </header>
