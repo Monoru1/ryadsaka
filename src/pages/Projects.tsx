@@ -11,23 +11,19 @@ export function Projects() {
     path: '/projets',
   })
 
-  const main = projects.filter((p) => p.screens.length > 0)
-  const experiments = projects.filter((p) => p.screens.length === 0)
-
   return (
     <Layout>
       <section className="page-intro">
         <p className="eyebrow">Sélection 2026 — tous les sites sont en ligne</p>
-        <h1>Un site ne devrait jamais avoir l’air d’avoir été fait pour quelqu’un d’autre.</h1>
+        <h1>Six projets. Six usages. Six façons différentes de faire rester quelqu’un.</h1>
         <p className="lead">
-          Un hôtel particulier, un musée automobile, un restaurant gastronomique, une boutique,
-          un portfolio d’artiste, une marque streetwear : mêmes mains, six mondes. Ouvrez-les —
-          la différence se voit mieux qu’elle ne s’explique.
+          Ici, pas de prototypes interchangeables : chaque étude de cas montre la page d’accueil,
+          des pages intérieures et la version mobile du projet concerné.
         </p>
       </section>
 
       <section className="all-projects">
-        {main.map((p, i) => (
+        {projects.map((p, i) => (
           <ProjectCard
             key={p.slug}
             project={p}
@@ -38,19 +34,6 @@ export function Projects() {
         ))}
       </section>
 
-      {experiments.length > 0 && (
-        <section className="experiments" data-reveal>
-          <div className="section-head">
-            <p className="eyebrow">Expérimentations</p>
-            <h2>Ce qui ne se vend pas mais dit quelque chose.</h2>
-          </div>
-          <div className="project-grid compact-grid">
-            {experiments.map((p) => (
-              <ProjectCard key={p.slug} project={p} variant="compact" />
-            ))}
-          </div>
-        </section>
-      )}
     </Layout>
   )
 }

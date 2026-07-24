@@ -1,17 +1,14 @@
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useLayoutEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Header } from './Header'
 import { Footer } from './Footer'
-import { useReveal } from '../../hooks/useReveal'
 
 export function Layout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation()
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
   }, [pathname])
-
-  useReveal()
 
   return (
     <>
